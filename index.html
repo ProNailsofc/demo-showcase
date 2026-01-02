@@ -12,7 +12,7 @@
         :root {
             --bg-body: #FAFAFA;     /* Branco Gelo */
             --bg-card: #FFFFFF;     /* Card Branco */
-            --brand: #D81B60;       /* Rosa/Magenta (MUDE AQUI) */
+            --brand: #D81B60;       /* ROSA (Padrão) - Mude aqui a cor da cliente */
             --text-main: #333333;   /* Texto Escuro */
             --text-muted: #888;
         }
@@ -40,11 +40,11 @@
 
         /* CARROSSEL */
         .vitrine-section { padding: 30px 0; background: #FFF; }
-        .carousel-track { display: flex; gap: 10px; width: max-content; animation: scroll 25s linear infinite; }
+        .carousel-track { display: flex; gap: 10px; width: max-content; animation: scroll 20s linear infinite; }
         .carousel-item { width: 150px; height: 200px; border-radius: 50px 50px 0 0; overflow: hidden; flex-shrink: 0; border: 2px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
         .carousel-item img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* SERVIÇOS (CLEAN) */
+        /* SERVIÇOS (CLEAN - SEM FOTO) */
         .booking-section { padding: 40px 20px; max-width: 600px; margin: 0 auto; }
         .section-header h2 { text-align:center; color:var(--text-main); margin-bottom:20px; font-family:'Playfair Display'; font-size: 2rem; }
         
@@ -59,8 +59,8 @@
         .service-card.selected { border-left-color: var(--brand); background: #FFF0F5; }
         
         .s-info h3 { font-weight: 600; font-size: 1rem; color: var(--text-main); margin-bottom: 2px;}
-        .s-info p { font-size: 0.75rem; color: var(--muted); }
-        .s-price { font-weight: 700; color: var(--brand); font-size: 1.1rem; font-family: 'Montserrat'; }
+        .s-info p { font-size: 0.75rem; color: var(--muted); display:flex; align-items:center; gap:5px; }
+        .s-price { font-weight: 700; color: var(--brand); font-size: 1.1rem; font-family: 'Montserrat'; white-space: nowrap; }
 
         /* FORMULÁRIO */
         .form-area { margin-top: 30px; background: #FFF; padding: 25px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
@@ -73,8 +73,16 @@
 
         .footer { text-align: center; padding: 40px; font-size: 0.7rem; color: #AAA; }
         
+        /* MODAL */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); z-index: 9999; display: none; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
+        .modal-box { background: #FFF; width: 90%; max-width: 380px; padding: 30px 25px; border-radius: 20px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); animation: appear 0.3s ease-out; color: #333; }
+        .modal-title { font-family: 'Playfair Display'; font-size: 1.5rem; color: var(--brand); margin-bottom: 15px; }
+        .btn-confirm { width: 100%; padding: 15px; border-radius: 50px; border: none; background: var(--brand); color: #FFF; font-weight: 800; text-transform: uppercase; cursor: pointer; margin-bottom: 10px;}
+        .btn-cancel { background: transparent; border: 1px solid #CCC; width: 100%; padding: 12px; border-radius: 50px; color: #888; font-weight: 600; cursor: pointer; text-transform: uppercase; }
+
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+        @keyframes appear { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -86,7 +94,7 @@
             <img src="logo.png" class="logo-img">
             <p class="tagline">Unhas que inspiram<br>beleza e confiança.</p>
             <div style="display:flex;">
-                <div class="badge">📍 Sua Cidade</div>
+                <div class="badge">📍 Sua Cidade</div> <!-- TROCAR -->
                 <div class="badge">✨ Especialista</div>
             </div>
         </div>
@@ -118,33 +126,55 @@
                 <div><label>Data</label><input type="date" id="cDate" onchange="updateTimeSlots()"></div>
                 <div><label>Horário</label><select id="cTime"><option value="">Selecione...</option></select></div>
             </div>
-            <button class="btn-submit" onclick="sendZap()">Verificar Disponibilidade</button>
+            <button class="btn-submit" onclick="openModal()">Verificar Disponibilidade</button>
         </div>
     </section>
     
     <div class="map-section">
-         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d144.9537353153167!3d-37.817323442021134!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577d3a0e6bdf2de!2sMelbourne%20VIC%2C%20Australia!5e0!3m2!1sen!2sus!4v1633074471643!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
+         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d144.9537353153167!3d-37.817323442021134!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjfCsDM4JzI5LjkiUyA0OMKwNDAnNDQuMiJX!5e0!3m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy"></iframe>
     </div>
 
     <div class="footer">© 2026 Tecnologia <span style="color:var(--brand); font-weight:bold;">Migre Agora</span></div>
+
+    <!-- MODAL CONFIRMAÇÃO -->
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="modal-box">
+            <h3 class="modal-title">✨ Quase lá!</h3>
+            <p id="modalResumo" style="color:#666; font-size:0.9rem; margin-bottom:15px;"></p>
+            <p class="modal-text" style="font-size:0.85rem; line-height:1.5;">
+                Ao confirmar, você será redirecionada para o WhatsApp para <strong>verificar a disponibilidade</strong> na agenda oficial.
+            </p>
+            <!-- AVISO DE TAXA (DESCOMENTE SE A CLIENTE COBRAR) -->
+            <!-- <p style="font-size:0.8rem; color:var(--brand); font-weight:bold; margin: 10px 0;">*Trabalhamos com sinal de 50% para reserva.</p> -->
+            <div style="margin-top: 20px; display: flex; flex-direction: column; gap: 10px;">
+                <button class="btn-confirm" onclick="confirmZap()">Confirmar e Enviar</button>
+                <button class="btn-cancel" onclick="closeModal()">Voltar / Editar</button>
+            </div>
+        </div>
+    </div>
 
     <script>
         const WHATSAPP = "5548999999999"; 
         const OPEN_HOUR = 8;
         const CLOSE_HOUR = 19;
 
-        // --- LISTA MESTRE (IGUAL) ---
+        // --- LISTA MESTRE DE SERVIÇOS (PADRÃO) ---
         const services = [
             { id: 1, name: "Aplicação Fibra de Vidro", price: 160, time: "3h" },
             { id: 2, name: "Aplicação Molde F1", price: 160, time: "2h30" },
-            { id: 3, name: "Manutenção Fibra", price: 100, time: "2h" },
-            { id: 4, name: "Banho de Gel", price: 90, time: "1h30" },
-            { id: 5, name: "Esmaltação em Gel", price: 70, time: "1h" },
-            { id: 6, name: "Blindagem", price: 60, time: "1h" },
-            { id: 7, name: "Mão Tradicional", price: 35, time: "40min" },
-            { id: 8, name: "Pé Tradicional", price: 45, time: "40min" },
-            { id: 9, name: "Pé e Mão Tradicional", price: 75, time: "1h30" },
-            { id: 10, name: "Remoção", price: 50, time: "40min" }
+            { id: 3, name: "Aplicação Gel na Tips", price: 140, time: "2h30" },
+            { id: 4, name: "Manutenção de Fibra/Gel", price: 100, time: "2h" },
+            { id: 5, name: "Manutenção (Outra Profissional)", price: 120, time: "2h30" },
+            { id: 6, name: "Banho de Gel (Blindagem)", price: 90, time: "1h30" },
+            { id: 7, name: "Esmaltação em Gel", price: 70, time: "1h" },
+            { id: 8, name: "Decoração / Encapsulada (Par)", price: 20, time: "+30min" },
+            { id: 9, name: "Francesinha (Adicional)", price: 15, time: "+15min" },
+            { id: 10, name: "Mão Tradicional (Cutilagem)", price: 35, time: "40min" },
+            { id: 11, name: "Pé Tradicional (Cutilagem)", price: 45, time: "40min" },
+            { id: 12, name: "Pé e Mão Tradicional", price: 75, time: "1h30" },
+            { id: 13, name: "Reposição de Unha (Unidade)", price: 15, time: "20min" },
+            { id: 14, name: "Remoção de Alongamento", price: 50, time: "40min" },
+            { id: 15, name: "Spa dos Pés", price: 60, time: "1h" }
         ];
 
         let selServ = null;
@@ -155,17 +185,17 @@
             
             const list = document.getElementById('serviceList');
             list.innerHTML = services.map(s => `
-                <div class="service-card" onclick="select(this, ${s.id})">
+                <div class="service-card" onclick="select(this, '${s.name}')">
                     <div class="s-info"><h3>${s.name}</h3><p>⏱ ${s.time}</p></div>
                     <div class="s-price">R$ ${s.price}</div>
                 </div>
             `).join('');
         };
 
-        function select(el, id) {
+        function select(el, name) {
             document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
             el.classList.add('selected');
-            selServ = services.find(s => s.id === id);
+            selServ = name;
             updateTimeSlots();
         }
 
@@ -174,7 +204,6 @@
             const timeSelect = document.getElementById('cTime');
             timeSelect.innerHTML = '<option value="">Selecione...</option>';
             if (!dateVal) return;
-            
             const selectedDate = new Date(dateVal + 'T00:00:00');
             const now = new Date();
             const isToday = selectedDate.toDateString() === now.toDateString();
@@ -187,17 +216,32 @@
             }
         }
 
-        function sendZap() {
+        function openModal() {
             const n = document.getElementById('cName').value;
             const d = document.getElementById('cDate').value;
             const t = document.getElementById('cTime').value;
             
-            if(!selServ || !n || !d || !t) { alert('Preencha tudo!'); return; }
+            if(!selServ || !n || !d || !t) { alert('Preencha tudo! ✨'); return; }
+
+            document.getElementById('modalResumo').innerHTML = `
+                <strong>Cliente:</strong> ${n}<br>
+                <strong>Serviço:</strong> ${selServ}<br>
+                <strong>Data:</strong> ${d.split('-').reverse().join('/')} às ${t}
+            `;
+            document.getElementById('modalOverlay').style.display = 'flex';
+        }
+
+        function closeModal() { document.getElementById('modalOverlay').style.display = 'none'; }
+
+        function confirmZap() {
+            const n = document.getElementById('cName').value;
+            const d = document.getElementById('cDate').value;
+            const t = document.getElementById('cTime').value;
+            const dStr = d.split('-').reverse().join('/');
             
-            const dStr = new Date(d + 'T00:00:00').toLocaleDateString('pt-BR');
-            const msg = `Olá! 🌸\nMe chamo *${n}*.\nQuero agendar: *${selServ.name}* (R$ ${selServ.price})\n📅 Data: *${dStr}*\n⏰ Horário: *${t}*\n\nTem vaga?`;
-            
+            const msg = `Olá! ✨\nMe chamo *${n}*.\n\nGostaria de verificar disponibilidade para:\n💅 *${selServ}*\n📅 Data: *${dStr}*\n⏰ Horário: *${t}*\n\nAguardo confirmação!`;
             window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`);
+            closeModal();
         }
     </script>
 </body>
