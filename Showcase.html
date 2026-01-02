@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Agendamento | Showcase</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CONFIGURAÇÃO SHOWCASE (LIGHT) --- */
+        :root {
+            --bg-body: #FAFAFA;     /* Branco Gelo */
+            --bg-card: #FFFFFF;     /* Card Branco */
+            --brand: #D81B60;       /* Rosa/Magenta (MUDE AQUI) */
+            --text-main: #333333;   /* Texto Escuro */
+            --text-muted: #888;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+        html { scroll-behavior: smooth; }
+        
+        body { 
+            background-color: var(--bg-body); 
+            color: var(--text-main); 
+            font-family: 'Montserrat', sans-serif; 
+            overflow-x: hidden;
+        }
+
+        /* HERO CENTRALIZADO (LOGO) */
+        .hero { position: relative; width: 100%; height: 100dvh; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; }
+        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('hero_bg.jpg'); background-size: cover; background-position: center; z-index: 1; }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, #FAFAFA 5%, rgba(250,250,250,0.8) 40%, rgba(255,255,255,0) 100%); z-index: 2; }
+        
+        .hero-content { position: relative; z-index: 10; padding: 0 20px 40px; text-align: center; width: 100%; display: flex; flex-direction: column; align-items: center; }
+        .logo-img { width: 140px; height: 140px; border-radius: 50%; border: 4px solid #FFF; box-shadow: 0 5px 20px rgba(0,0,0,0.1); object-fit: cover; margin-bottom: 20px; animation: float 3s ease-in-out infinite;}
+        .tagline { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--brand); font-style: italic; margin-bottom: 15px; }
+        
+        .badge { background: #FFF; color: var(--brand); padding: 6px 16px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; border: 1px solid var(--brand); box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin: 0 5px; }
+
+        /* CARROSSEL */
+        .vitrine-section { padding: 30px 0; background: #FFF; }
+        .carousel-track { display: flex; gap: 10px; width: max-content; animation: scroll 25s linear infinite; }
+        .carousel-item { width: 150px; height: 200px; border-radius: 50px 50px 0 0; overflow: hidden; flex-shrink: 0; border: 2px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .carousel-item img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* SERVIÇOS (CLEAN) */
+        .booking-section { padding: 40px 20px; max-width: 600px; margin: 0 auto; }
+        .section-header h2 { text-align:center; color:var(--text-main); margin-bottom:20px; font-family:'Playfair Display'; font-size: 2rem; }
+        
+        .service-list { display: flex; flex-direction: column; gap: 10px; }
+        .service-card {
+            background: var(--bg-card); border-radius: 10px; padding: 15px 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03); border-left: 5px solid transparent;
+            cursor: pointer; transition: 0.2s;
+        }
+        .service-card:hover { transform: translateX(5px); }
+        .service-card.selected { border-left-color: var(--brand); background: #FFF0F5; }
+        
+        .s-info h3 { font-weight: 600; font-size: 1rem; color: var(--text-main); margin-bottom: 2px;}
+        .s-info p { font-size: 0.75rem; color: var(--muted); }
+        .s-price { font-weight: 700; color: var(--brand); font-size: 1.1rem; font-family: 'Montserrat'; }
+
+        /* FORMULÁRIO */
+        .form-area { margin-top: 30px; background: #FFF; padding: 25px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        input, select { width: 100%; padding: 15px; border: 1px solid #EEE; border-radius: 8px; margin-bottom: 15px; font-family: 'Montserrat'; }
+        
+        .btn-submit { width: 100%; padding: 18px; background: var(--brand); color: #FFF; border: none; border-radius: 50px; font-weight: 700; text-transform: uppercase; cursor: pointer; }
+
+        .map-section { margin-top: 40px; padding: 0 20px; }
+        iframe { width: 100%; height: 200px; border-radius: 15px; border: none; }
+
+        .footer { text-align: center; padding: 40px; font-size: 0.7rem; color: #AAA; }
+        
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <img src="logo.png" class="logo-img">
+            <p class="tagline">Unhas que inspiram<br>beleza e confiança.</p>
+            <div style="display:flex;">
+                <div class="badge">📍 Sua Cidade</div>
+                <div class="badge">✨ Especialista</div>
+            </div>
+        </div>
+    </header>
+
+    <section class="vitrine-section">
+        <div class="carousel-track">
+            <div class="carousel-item"><img src="unha1.jpg"></div>
+            <div class="carousel-item"><img src="unha2.jpg"></div>
+            <div class="carousel-item"><img src="unha3.jpg"></div>
+            <div class="carousel-item"><img src="unha4.jpg"></div>
+            <div class="carousel-item"><img src="unha5.jpg"></div>
+            <div class="carousel-item"><img src="unha1.jpg"></div>
+            <div class="carousel-item"><img src="unha2.jpg"></div>
+            <div class="carousel-item"><img src="unha3.jpg"></div>
+            <div class="carousel-item"><img src="unha4.jpg"></div>
+            <div class="carousel-item"><img src="unha5.jpg"></div>
+        </div>
+    </section>
+
+    <section class="booking-section">
+        <div class="section-header"><h2>Menu de Serviços</h2></div>
+        
+        <div id="serviceList" class="service-list"></div>
+
+        <div class="form-area">
+            <div><label>Seu Nome</label><input type="text" id="cName" placeholder="Digite seu nome"></div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div><label>Data</label><input type="date" id="cDate" onchange="updateTimeSlots()"></div>
+                <div><label>Horário</label><select id="cTime"><option value="">Selecione...</option></select></div>
+            </div>
+            <button class="btn-submit" onclick="sendZap()">Verificar Disponibilidade</button>
+        </div>
+    </section>
+    
+    <div class="map-section">
+         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d144.9537353153167!3d-37.817323442021134!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577d3a0e6bdf2de!2sMelbourne%20VIC%2C%20Australia!5e0!3m2!1sen!2sus!4v1633074471643!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+
+    <div class="footer">© 2026 Tecnologia <span style="color:var(--brand); font-weight:bold;">Migre Agora</span></div>
+
+    <script>
+        const WHATSAPP = "5548999999999"; 
+        const OPEN_HOUR = 8;
+        const CLOSE_HOUR = 19;
+
+        // --- LISTA MESTRE (IGUAL) ---
+        const services = [
+            { id: 1, name: "Aplicação Fibra de Vidro", price: 160, time: "3h" },
+            { id: 2, name: "Aplicação Molde F1", price: 160, time: "2h30" },
+            { id: 3, name: "Manutenção Fibra", price: 100, time: "2h" },
+            { id: 4, name: "Banho de Gel", price: 90, time: "1h30" },
+            { id: 5, name: "Esmaltação em Gel", price: 70, time: "1h" },
+            { id: 6, name: "Blindagem", price: 60, time: "1h" },
+            { id: 7, name: "Mão Tradicional", price: 35, time: "40min" },
+            { id: 8, name: "Pé Tradicional", price: 45, time: "40min" },
+            { id: 9, name: "Pé e Mão Tradicional", price: 75, time: "1h30" },
+            { id: 10, name: "Remoção", price: 50, time: "40min" }
+        ];
+
+        let selServ = null;
+
+        window.onload = () => {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('cDate').min = today;
+            
+            const list = document.getElementById('serviceList');
+            list.innerHTML = services.map(s => `
+                <div class="service-card" onclick="select(this, ${s.id})">
+                    <div class="s-info"><h3>${s.name}</h3><p>⏱ ${s.time}</p></div>
+                    <div class="s-price">R$ ${s.price}</div>
+                </div>
+            `).join('');
+        };
+
+        function select(el, id) {
+            document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+            selServ = services.find(s => s.id === id);
+            updateTimeSlots();
+        }
+
+        function updateTimeSlots() {
+            const dateVal = document.getElementById('cDate').value;
+            const timeSelect = document.getElementById('cTime');
+            timeSelect.innerHTML = '<option value="">Selecione...</option>';
+            if (!dateVal) return;
+            
+            const selectedDate = new Date(dateVal + 'T00:00:00');
+            const now = new Date();
+            const isToday = selectedDate.toDateString() === now.toDateString();
+            const currentHour = now.getHours();
+            
+            for (let h = OPEN_HOUR; h <= CLOSE_HOUR; h++) {
+                if (isToday && h <= currentHour) continue;
+                timeSelect.innerHTML += `<option value="${h}:00">${h}:00</option>`;
+                if(h !== CLOSE_HOUR) timeSelect.innerHTML += `<option value="${h}:30">${h}:30</option>`;
+            }
+        }
+
+        function sendZap() {
+            const n = document.getElementById('cName').value;
+            const d = document.getElementById('cDate').value;
+            const t = document.getElementById('cTime').value;
+            
+            if(!selServ || !n || !d || !t) { alert('Preencha tudo!'); return; }
+            
+            const dStr = new Date(d + 'T00:00:00').toLocaleDateString('pt-BR');
+            const msg = `Olá! 🌸\nMe chamo *${n}*.\nQuero agendar: *${selServ.name}* (R$ ${selServ.price})\n📅 Data: *${dStr}*\n⏰ Horário: *${t}*\n\nTem vaga?`;
+            
+            window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`);
+        }
+    </script>
+</body>
+</html>
